@@ -10,6 +10,8 @@ const ModuleListScreen = () => {
   return (
     <Screen>
       <ModuleList modules={modules} onSelect={handleSelect} />
+
+      <ModuleList modules={modules} onSelect={handleSelect} />
     </Screen>
   );
 };
