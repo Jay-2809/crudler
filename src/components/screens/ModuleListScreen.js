@@ -1,5 +1,5 @@
-import { StyleSheet, Text } from 'react-native';
-import Screen from '../layout/Screen';
+import { StyleSheet, Text } from "react-native";
+import Screen from "../layout/Screen";
 
 const ModuleListScreen = () => {
   return (
@@ -7,9 +7,8 @@ const ModuleListScreen = () => {
       <Text>List</Text>
     </Screen>
   );
-}
+};
 
-const styles = StyleSheet.create({}
-);
+const styles = StyleSheet.create({});
 
 export default ModuleListScreen;
