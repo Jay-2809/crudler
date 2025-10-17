@@ -28,7 +28,7 @@ const ModuleListScreen = () => {
 const styles = StyleSheet.create({
   container: {},
   item: {
-    PaddingVertical: 15,
+    paddingVertical: 15,
     borderTopWidth: 1,
     borderColor: "lightgray",
   },
