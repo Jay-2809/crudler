@@ -1,15 +1,17 @@
-import { StyleSheet, Text } from 'react-native';
-import Screen from '../layout/Screen';
+import { StyleSheet } from "react-native";
+import ModuleView from "../entity/modules/ModuleView";
+import Screen from "../layout/Screen";
 
-const ModuleViewScreen = () => {
+const ModuleViewScreen = ({ navigate, route }) => {
+  const { module } = route.params;
+
   return (
     <Screen>
-      <Text>View</Text>
+      <ModuleView module={module} />
     </Screen>
   );
-}
+};
 
-const styles = StyleSheet.create({}
-);
+const styles = StyleSheet.create({});
 
 export default ModuleViewScreen;
