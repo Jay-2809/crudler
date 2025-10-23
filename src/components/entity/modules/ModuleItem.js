@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 const ModuleItem = ({ module, onSelect }) => {
+  const handleSelect = () => onSelect(module);
   return (
     <Pressable onPress={() => onSelect(module)}>
       <View style={styles.item}>
