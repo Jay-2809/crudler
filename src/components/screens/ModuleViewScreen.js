@@ -6,7 +6,7 @@ const ModuleViewScreen = ({ navigation, route }) => {
   const { module, onDelete, onModify } = route.params;
 
   const gotoModifyScreen = () =>
-    navigation.navigate("ModuleModifyScreen", { module, onModify });
+    navigation.replace("ModuleModifyScreen", { module, onModify });
 
   return (
     <Screen>

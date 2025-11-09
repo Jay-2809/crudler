@@ -34,7 +34,9 @@ const ModuleListScreen = ({ navigation }) => {
 
   const onModify = (module) => {
     handleModify(module);
-    navigation.navigate("ModuleListScreen", { module, onDelete, onModify });
+    //navigation.navigate("ModuleListScreen");
+    //navigation.popToTop();
+    navigation.replace("ModuleViewScreen", { module, onDelete, onModify });
   };
 
   const gotoViewScreen = (module) =>
