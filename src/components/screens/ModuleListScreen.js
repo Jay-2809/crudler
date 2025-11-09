@@ -8,16 +8,19 @@ import { Button, ButtonTray } from "../UI/Button.js";
 import initialModules from "../../data/modules.js";
 
 const ModuleListScreen = ({ navigation }) => {
-  LogBox.ignoreLogs([
-    "Non-serializable values were found in the navigation state",
-  ]);
-
   const [modules, setModules] = useState(initialModules);
 
   const handleDelete = (module) =>
     setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
 
   const handleAdd = (module) => setModules([...modules, module]);
+
+  const handleModify = (updatedModule) =>
+    setModules(
+      modules.map((module) =>
+        module.ModuleID == updatedModule.ModuleID ? updatedModule : module
+      )
+    );
 
   const onDelete = (module) => {
     handleDelete(module);
@@ -29,8 +32,13 @@ const ModuleListScreen = ({ navigation }) => {
     navigation.goBack();
   };
 
+  const onModify = (module) => {
+    handleModify(module);
+    navigation.navigate("ModuleListScreen", { module, onDelete, onModify });
+  };
+
   const gotoViewScreen = (module) =>
-    navigation.navigate("ModuleViewScreen", { module, onDelete });
+    navigation.navigate("ModuleViewScreen", { module, onDelete, onModify });
   const gotoAddScreen = () => navigation.navigate("ModuleAddScreen", { onAdd });
 
   return (
