@@ -13,7 +13,7 @@ const defaultModule = {
   ModuleImageURL: null,
 };
 
-const ModuleForm = ({ onSubmit, onCancel }) => {
+const ModuleForm = ({ originalModule, onSubmit, onCancel }) => {
   (defaultModule.ModuleID = Math.floor(100000 + Math.random() * 900000)),
     (defaultModule.ModuleImageURL =
       "https://images.freeimages.com/images/small-previews/cf5/cellphone-1313194.jpg");
@@ -26,13 +26,13 @@ const ModuleForm = ({ onSubmit, onCancel }) => {
     { value: 7, label: "7 (Masters)" },
   ];
 
-  const [module, setModule] = useState(defaultModule);
+  const [module, setModule] = useState(originalModule || defaultModule);
   const handleChange = (field, value) =>
     setModule({ ...module, [field]: value });
   const handleSubmit = () => onSubmit(module);
 
-  const submitLabel = "Add";
-  const submitIcon = <Icons.Add />;
+  const submitLabel = originalModule ? "Modify" : "Add";
+  const submitIcon = originalModule ? <Icons.Edit /> : <Icons.Add />;
 
   return (
     <Form
