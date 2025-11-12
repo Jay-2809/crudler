@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { LogBox, StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import useLoad from "../API/useLoad.js";
 import Screen from "../layout/Screen";
+import RenderCount from "../UI/RenderCount.js";
 import ModuleList from "../entity/modules/ModuleList.js";
 import Icons from "../UI/Icons.js";
 import { Button, ButtonTray } from "../UI/Button.js";
 
-import initialModules from "../../data/modules.js";
-
 const ModuleListScreen = ({ navigation }) => {
-  const [modules, setModules] = useState(initialModules);
+  const modulesEndpoint = "https://softwarehub.uk/unibase/api/modules";
+
+  const [modules, setModules, isLoading, loadModules] =
+    useLoad(modulesEndpoint);
 
   const handleDelete = (module) =>
     setModules(modules.filter((item) => item.ModuleID !== module.ModuleID));
@@ -45,9 +47,11 @@ const ModuleListScreen = ({ navigation }) => {
 
   return (
     <Screen>
+      <RenderCount />
       <ButtonTray>
         <Button label="Add" icon={<Icons.Add />} onClick={gotoAddScreen} />
       </ButtonTray>
+      {isLoading && <Text>Loading records ... </Text>}
       <ModuleList modules={modules} onSelect={gotoViewScreen} />
     </Screen>
   );
