@@ -9,7 +9,7 @@ import { Button, ButtonTray } from "../UI/Button.js";
 const ModuleListScreen = ({ navigation }) => {
   const modulesEndpoint = "https://softwarehub.uk/unibase/api/modules";
 
-  const [modules, isLoading, loadModules] = useLoad(modulesEndpoint);
+  const [modules, , isLoading, loadModules] = useLoad(modulesEndpoint);
 
   const onDelete = async (module) => {
     const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
@@ -30,7 +30,7 @@ const ModuleListScreen = ({ navigation }) => {
 
   const onModify = async (module) => {
     const putEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
-    const result = await API.putt(putEndpoint, module);
+    const result = await API.put(putEndpoint, module);
     if (result.isSuccess) {
       loadModules(modulesEndpoint);
       navigation.navigate("ModuleListScreen", { module, onDelete, onModify });
