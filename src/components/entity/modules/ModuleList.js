@@ -7,7 +7,7 @@ const ModuleList = ({ modules, onSelect }) => {
       {modules.map((module) => {
         return (
           <ModuleItem
-            key={module.ModuleCode}
+            key={module.ModuleID}
             module={module}
             onSelect={onSelect}
           />
