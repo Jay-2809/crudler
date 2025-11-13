@@ -38,7 +38,14 @@ const InputText = ({ label, value, onChange }) => {
   );
 };
 
-const InputSelect = ({ label, prompt, options, value, onChange }) => {
+const InputSelect = ({
+  label,
+  prompt,
+  options,
+  value,
+  onChange,
+  isLoading = false,
+}) => {
   const selectListData = options.map((option) => ({
     key: option.value,
     value: option.label,
@@ -47,13 +54,19 @@ const InputSelect = ({ label, prompt, options, value, onChange }) => {
   return (
     <View style={styles.item}>
       <Text style={styles.itemLabel}>{label}</Text>
-      <SelectList
-        setSelected={onChange}
-        data={selectListData}
-        placeholder={prompt}
-        defaultOption={selectListData.find((item) => item.key === value)}
-        boxStyles={styles.selectListDropdownStyle}
-      />
+      {isLoading ? (
+        <View style={styles.itemLoading}>
+          <Text style={styles.itemLoadingText}>Loading records ... </Text>
+        </View>
+      ) : (
+        <SelectList
+          setSelected={onChange}
+          data={selectListData}
+          placeholder={prompt}
+          defaultOption={selectListData.find((item) => item.key === value)}
+          boxStyles={styles.selectListDropdownStyle}
+        />
+      )}
     </View>
   );
 };
@@ -72,6 +85,16 @@ const styles = StyleSheet.create({
     color: "grey",
     fontSize: 16,
     marginBottom: 5,
+  },
+  itemLoading: {
+    height: 50,
+    backgroundColor: "mistyrose",
+    justifyContent: "center",
+    paddingLeft: 10,
+  },
+  itemLoadingText: {
+    fontSize: 16,
+    color: "gray",
   },
   itemTextInput: {
     height: 50,

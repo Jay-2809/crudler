@@ -58,6 +58,16 @@ const ModuleListScreen = ({ navigation }) => {
     </Screen>
   );
 };
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    gap: 15,
+  },
+  loading: {
+    height: 100,
+    gap: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default ModuleListScreen;
