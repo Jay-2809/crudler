@@ -9,7 +9,7 @@ import { Button, ButtonTray } from "../UI/Button.js";
 const ModuleListScreen = ({ navigation }) => {
   const modulesEndpoint = "https://softwarehub.uk/unibase/api/modules";
 
-  const [modules, isLoading, loadModules] = useLoad(modulesEndpoint);
+  const [modules, , isLoading, loadModules] = useLoad(modulesEndpoint);
 
   const onDelete = async (module) => {
     const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
