@@ -14,7 +14,6 @@ const ModuleListScreen = ({ navigation }) => {
 
   const [modules, , isLoading, loadModules] = useLoad(modulesEndpoint);
   const [loggedinUser, saveLoggedinUser] = UseStore(loggedinUserKey, null);
-
   const onDelete = async (module) => {
     const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
     const result = await API.delete(deleteEndpoint, module);
