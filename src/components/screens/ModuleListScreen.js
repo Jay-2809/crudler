@@ -1,15 +1,19 @@
 import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import useLoad from "../API/useLoad.js";
+import UseStore from "../store/useStore.js";
 import API from "../API/API.js";
 import Screen from "../layout/Screen";
+import RenderCount from "../UI/RenderCount.js";
 import ModuleList from "../entity/modules/ModuleList.js";
 import Icons from "../UI/Icons.js";
 import { Button, ButtonTray } from "../UI/Button.js";
 
 const ModuleListScreen = ({ navigation }) => {
   const modulesEndpoint = "https://softwarehub.uk/unibase/api/modules";
+  const loggedinUserKey = "loggedinUser";
 
   const [modules, , isLoading, loadModules] = useLoad(modulesEndpoint);
+  const [loggedinUser, saveLoggedinUser] = UseStore(loggedinUserKey, null);
 
   const onDelete = async (module) => {
     const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
@@ -43,6 +47,10 @@ const ModuleListScreen = ({ navigation }) => {
 
   return (
     <Screen>
+      <RenderCount />
+      {loggedinUser && (
+        <Text style={styles.welcome}>Welcome {loggedinUser.UserFirstname}</Text>
+      )}
       <ButtonTray>
         <Button label="Add" icon={<Icons.Add />} onClick={gotoAddScreen} />
       </ButtonTray>
@@ -59,6 +67,10 @@ const ModuleListScreen = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
+  welcome: {
+    marginTop: 5,
+    marginBottom: 5,
+  },
   container: {
     gap: 15,
   },
