@@ -7,13 +7,46 @@ import RenderCount from "../UI/RenderCount.js";
 import ModuleList from "../entity/modules/ModuleList.js";
 import Icons from "../UI/Icons.js";
 import { Button, ButtonTray } from "../UI/Button.js";
+import { useEffect } from "react";
 
 const ModuleListScreen = ({ navigation }) => {
   const modulesEndpoint = "https://softwarehub.uk/unibase/api/modules";
   const loggedinUserKey = "loggedinUser";
+  const favouritesKey = "moduleFavourites";
 
-  const [modules, , isLoading, loadModules] = useLoad(modulesEndpoint);
-  const [loggedinUser, saveLoggedinUser] = UseStore(loggedinUserKey, null);
+  const [modules, setModules, isLoading, loadModules] =
+    useLoad(modulesEndpoint);
+  const [loggedinUser] = UseStore(loggedinUserKey, null);
+  const [favourites, saveFavourites] = UseStore(favouritesKey, []);
+
+  const augmentModulesWithFavourites = () => {
+    const modifyModule = (module) => ({
+      ...module,
+      ModuleFavourite: favourites.includes(module.ModuleID),
+    });
+    const augmentedModules = modules.map(modifyModule);
+    augmentedModules.length > 0 && setModules(augmentedModules);
+  };
+
+  useEffect(() => {
+    augmentModulesWithFavourites();
+  }, [isLoading]);
+
+  const handleFavourite = (module) => {
+    const isFavourite = !module.ModuleFavourite;
+    const updateModule = (item) =>
+      item.ModuleID === module.ModuleID
+        ? { ...item, ModuleFavourite: isFavourite }
+        : item;
+    const updatedModuleList = modules.map(updateModule);
+    setModules(updatedModuleList);
+
+    const updatedFavouritesList = updatedModuleList
+      .filter((item) => item.ModuleFavourite)
+      .map((item) => item.ModuleID);
+    saveFavourites(updatedFavouritesList);
+  };
+
   const onDelete = async (module) => {
     const deleteEndpoint = `${modulesEndpoint}/${module.ModuleID}`;
     const result = await API.delete(deleteEndpoint, module);
@@ -53,7 +86,6 @@ const ModuleListScreen = ({ navigation }) => {
       <ButtonTray>
         <Button label="Add" icon={<Icons.Add />} onClick={gotoAddScreen} />
       </ButtonTray>
-
       {isLoading && (
         <View style={styles.spinner}>
           <Text>Retrieving records from {modulesEndpoint} ... </Text>
@@ -61,7 +93,11 @@ const ModuleListScreen = ({ navigation }) => {
         </View>
       )}
 
-      <ModuleList modules={modules} onSelect={gotoViewScreen} />
+      <ModuleList
+        modules={modules}
+        onSelect={gotoViewScreen}
+        onFavourite={handleFavourite}
+      />
     </Screen>
   );
 };
