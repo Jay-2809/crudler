@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet } from "react-native";
 import ModuleItem from "./ModuleItem.js";
 
-const ModuleList = ({ modules, onSelect }) => {
+const ModuleList = ({ modules, onSelect, onFavourite }) => {
   return (
     <ScrollView style={styles.container}>
       {modules.map((module) => {
@@ -10,6 +10,7 @@ const ModuleList = ({ modules, onSelect }) => {
             key={module.ModuleID}
             module={module}
             onSelect={onSelect}
+            onFavourite={onFavourite}
           />
         );
       })}
