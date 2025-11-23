@@ -69,7 +69,7 @@ const ModuleListScreen = ({ navigation }) => {
     const result = await API.put(putEndpoint, module);
     if (result.isSuccess) {
       loadModules(modulesEndpoint);
-      navigation.navigate("ModuleListScreen", { module, onDelete, onModify });
+      navigation.goBack();
     } else Alert.alert(result.message);
   };
 
@@ -84,7 +84,11 @@ const ModuleListScreen = ({ navigation }) => {
         <Text style={styles.welcome}>Welcome {loggedinUser.UserFirstname}</Text>
       )}
       <ButtonTray>
-        <Button label="Add" icon={<Icons.Add />} onClick={gotoAddScreen} />
+        <Button
+          label="Add Module"
+          icon={<Icons.Add />}
+          onClick={gotoAddScreen}
+        />
       </ButtonTray>
       {isLoading && (
         <View style={styles.spinner}>
