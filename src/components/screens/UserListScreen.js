@@ -2,12 +2,11 @@ import { ActivityIndicator, Alert, StyleSheet, Text, View } from "react-native";
 import useLoad from "../API/useLoad.js";
 import UseStore from "../store/useStore.js";
 import API from "../API/API.js";
-import Screen from "../layout/Screen";
+import Screen from "../layout/Screen.js";
 import RenderCount from "../UI/RenderCount.js";
 import UserList from "../entity/users/UserList.js";
 import Icons from "../UI/Icons.js";
-import { Button, ButtonTray } from "../UI/Button.js";
-import { useEffect } from "react";
+import { Button, ButtonTray } from "../UI/Button";
 
 const UserListScreen = ({ navigation }) => {
   const usersEndpoint = "https://softwarehub.uk/unibase/api/users";
