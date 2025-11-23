@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet } from "react-native";
 import useLoad from "../../API/useLoad.js";
 import Icons from "../../UI/Icons.js";
 import Form from "../../UI/Form.js";
