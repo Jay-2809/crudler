@@ -10,7 +10,7 @@ const defaultUser = {
   UserLastname: null,
   UserEmail: null,
   UserImageURL: null,
-  UserType: "Student" || "Staff",
+  UserType: null,
   UserYear: null,
 };
 
