@@ -63,6 +63,7 @@ const InputSelect = ({
           setSelected={onChange}
           data={selectListData}
           placeholder={prompt}
+          save="key"
           defaultOption={selectListData.find((item) => item.key === value)}
           boxStyles={styles.selectListDropdownStyle}
         />
