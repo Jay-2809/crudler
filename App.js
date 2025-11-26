@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import ModuleListScreen from "./src/components/screens/ModuleListScreen";
 import ModuleAddScreen from "./src/components/screens/ModuleAddScreen";
 import ModuleViewScreen from "./src/components/screens/ModuleViewScreen";
@@ -10,95 +10,99 @@ import UserAddScreen from "./src/components/screens/UserAddScreen";
 import UserViewScreen from "./src/components/screens/UserViewScreen";
 import UserModifyScreen from "./src/components/screens/UserModifyScreen";
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const ModuleStack = createNativeStackNavigator();
+const UserStack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
-function ModuleStack() {
+function ModuleStackNavigator() {
   return (
-    <Stack.Navigator
+    <ModuleStack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: "black" },
-        headerTintColor: "white",
+        headerStyle: { backgroundColor: "white" },
+        headerTintColor: "black",
       }}
     >
-      <Stack.Screen
+      <ModuleStack.Screen
         name="ModuleListScreen"
         component={ModuleListScreen}
         options={{ title: "List modules" }}
       />
 
-      <Stack.Screen
+      <ModuleStack.Screen
         name="ModuleAddScreen"
         component={ModuleAddScreen}
         options={{ title: "Add module" }}
       />
 
-      <Stack.Screen
+      <ModuleStack.Screen
         name="ModuleViewScreen"
         component={ModuleViewScreen}
         options={{ title: "View module" }}
       />
 
-      <Stack.Screen
+      <ModuleStack.Screen
         name="ModuleModifyScreen"
         component={ModuleModifyScreen}
         options={{ title: "Modify module" }}
       />
-    </Stack.Navigator>
+    </ModuleStack.Navigator>
   );
 }
 
-function UserStack() {
+function UserStackNavigator() {
   return (
-    <Stack.Navigator
+    <UserStack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: "black" },
-        headerTintColor: "white",
+        headerStyle: { backgroundColor: "white" },
+        headerTintColor: "black",
       }}
     >
-      <Stack.Screen
+      <UserStack.Screen
         name="UserListScreen"
         component={UserListScreen}
         options={{ title: "List users" }}
       />
-      <Stack.Screen
+      <UserStack.Screen
         name="UserAddScreen"
         component={UserAddScreen}
         options={{ title: "Add user" }}
       />
-      <Stack.Screen
+      <UserStack.Screen
         name="UserViewScreen"
         component={UserViewScreen}
         options={{ title: "View user" }}
       />
-      <Stack.Screen
+      <UserStack.Screen
         name="UserModifyScreen"
         component={UserModifyScreen}
         options={{ title: "Modify user" }}
       />
-    </Stack.Navigator>
+    </UserStack.Navigator>
   );
 }
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Drawer.Navigator
+        initialRouteName="ModuleCrudler"
         screenOptions={{
-          headerShown: false,
+          headerShown: { backgroundColor: "white" },
+          headerTintColor: "black",
         }}
       >
-        <Tab.Screen
-          name="Module CRUDler"
-          component={ModuleStack}
-          options={{ headerShown: false }}
+        <Drawer.Screen
+          name="ModuleCrudler"
+          component={ModuleStackNavigator}
+          options={{ title: "Module CRUDler" }}
         />
-        <Tab.Screen
-          name="Users CRUDler"
-          component={UserStack}
-          options={{ headerShown: false }}
+        <Drawer.Screen
+          name="UsersCrudler"
+          component={UserStackNavigator}
+          options={{ title: "User CRUdler" }}
         />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
-}
+};
+export default App;
