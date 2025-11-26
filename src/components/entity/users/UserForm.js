@@ -2,7 +2,6 @@ import { useState } from "react";
 import { StyleSheet } from "react-native";
 import Icons from "../../UI/Icons.js";
 import Form from "../../UI/Form.js";
-import useLoad from "../../API/useLoad.js";
 
 const defaultUser = {
   UserID: null,
